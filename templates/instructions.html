@@ -1,0 +1,438 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="eng-tab" data-bs-toggle="tab" data-bs-target="#eng" type="button" role="tab" aria-controls="english" aria-selected="true"><img src="../images/us.svg" alt="eng" width="25"></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="rus-tab" data-bs-toggle="tab" data-bs-target="#rus" type="button" role="tab" aria-controls="russian" aria-selected="false"><img src="../images/ru.svg" alt="rus" width="25"></button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane fade show active" id="eng" role="tabpanel" aria-labelledby="eng-tab">
+      <div class="accordion lang_tab">
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_1" aria-expanded="true" aria-controls="eng_1">
+                Explanation of tabs
+              </button>
+            </h2>
+            <div id="eng_1" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                  
+                <h2>Browse</h2>
+
+                This button will bring the user to a list of over 2200 constructions that they
+                can scroll through. On this page the user can search for any string that is
+                part of the name of a construction and get the construction(s) that match the
+                string. For each construction we list the ID Number, the Name and the Illustration, and the
+                user clicks to get the whole entry for the construction. Some of the numbers of constructions are not consecutive. This is not an error. This is the result of a long process of collecting constructions and removing duplicates.
+
+                NB! It may take a few seconds for the constructions to load on the website. If you are experiencing delays, you might try opening the webpage on a different browser, since some browsers work faster than others.
+
+                <h2>Daily Dose</h2>
+
+                On this page the user can choose their proficiency level from a menu and then
+                will receive five constructions chosen at random from their proficiency level.
+                Like on Browse, the user sees just the Name and Illustration in this list and
+                then clicks to get the full construction entry.
+
+
+                <h2>Advanced Search</h2>
+
+                On this page the user can filter constructions according to various parameters
+                that can be combined (multiple filters on the same search).
+
+
+                <h2>Instructions (English)</h2>
+
+                This page contains instructions for users in English.
+
+
+                <h2>Instructions (Russian)</h2>
+
+                This page contains instructions for users in Russian.
+
+
+                <h2>About</h2>
+
+                On this page the user can find information about the project and the team.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_2" aria-expanded="false" aria-controls="eng_2">
+                Abbreviations and symbols
+              </button>
+            </h2>
+            <div id="eng_2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <p>Each construction is represented by its name and a short illustration: e.g.
+                  <strong>найти-Pst NP-Acc!</strong> <em>Нашли развлечение!</em> (‘What a bad way to amuse yourself!
+                  [lit. found amusement]’). The name of a construction is a short morphosyntactic
+                  formula that usually includes fixed lexical parts (called the <strong>anchor</strong>) as well as grammatical <strong>slots</strong>
+                  indicated by means of common abbreviations like NP, VP, etc. When necessary, we
+                  specify morphological characteristics of the fixed lexeme or a slot, where we
+                  use abbreviations according the Leipzig Glossing rules.</p>
+                  <table>
+                  <thead>
+                  <tr>
+                  <th>Gloss</th>
+                  <th>Explanation</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                  <td>1</td>
+                  <td>First person</td>
+                  </tr>
+                  <tr>
+                  <td>2</td>
+                  <td>Second person</td>
+                  </tr>
+                  <tr>
+                  <td>3</td>
+                  <td>Third person</td>
+                  </tr>
+                  <tr>
+                  <td>()</td>
+                  <td>Optional element</td>
+                  </tr>
+                  <tr>
+                  <td>/</td>
+                  <td>Alternative elements</td>
+                  </tr>
+                  <tr>
+                  <td>~</td>
+                  <td>Reduplication (repetition of the same word or morpheme)</td>
+                  </tr>
+                  <tr>
+                  <td>Acc</td>
+                  <td>Accusative</td>
+                  </tr>
+                  <tr>
+                  <td>Adj</td>
+                  <td>Adjective</td>
+                  </tr>
+                  <tr>
+                  <td>Adv</td>
+                  <td>Adverb</td>
+                  </tr>
+                  <tr>
+                  <td>Anim</td>
+                  <td>Animate</td>
+                  </tr>
+                  <tr>
+                  <td>Bare</td>
+                  <td>Bare stem of a verb (e.g. <em>прыг, шлеп, скок</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>Cconj</td>
+                  <td>Coordinating conjunction</td>
+                  </tr>
+                  <tr>
+                  <td>Cl</td>
+                  <td>Clause</td>
+                  </tr>
+                  <tr>
+                  <td>Cmp</td>
+                  <td>Comparative</td>
+                  </tr>
+                  <tr>
+                  <td>Cop</td>
+                  <td>Copula</td>
+                  </tr>
+                  <tr>
+                  <td>Cvb</td>
+                  <td>Converb (verbal adverb)</td>
+                  </tr>
+                  <tr>
+                  <td>Dat</td>
+                  <td>Dative</td>
+                  </tr>
+                  <tr>
+                  <td>F</td>
+                  <td>Feminine</td>
+                  </tr>
+                  <tr>
+                  <td>Fut</td>
+                  <td>Future</td>
+                  </tr>
+                  <tr>
+                  <td>Gen</td>
+                  <td>Genitive</td>
+                  </tr>
+                  <tr>
+                  <td>Gen2</td>
+                  <td>&quot;Second&quot; genitive (Partitive genitive)</td>
+                  </tr>
+                  <tr>
+                  <td>Imp</td>
+                  <td>Imperative</td>
+                  </tr>
+                  <tr>
+                  <td>Inan</td>
+                  <td>Inanimate</td>
+                  </tr>
+                  <tr>
+                  <td>Ind</td>
+                  <td>Indicative</td>
+                  </tr>
+                  <tr>
+                  <td>Inf</td>
+                  <td>Infinitive</td>
+                  </tr>
+                  <tr>
+                  <td>Ins</td>
+                  <td>Instrumental</td>
+                  </tr>
+                  <tr>
+                  <td>Ipfv</td>
+                  <td>Imperfective</td>
+                  </tr>
+                  <tr>
+                  <td>Loc</td>
+                  <td>Locative</td>
+                  </tr>
+                  <tr>
+                  <td>M</td>
+                  <td>Masculine</td>
+                  </tr>
+                  <tr>
+                  <td>N</td>
+                  <td>Neuter</td>
+                  </tr>
+                  <tr>
+                  <td>N-</td>
+                  <td>Non- (e.g. Nsg=nonsingular, Npst=Nonpast)</td>
+                  </tr>
+                  <tr>
+                  <td>Intj</td>
+                  <td>Interjection</td>
+                  </tr>
+                  <tr>
+                  <td>Nom</td>
+                  <td>Nominative</td>
+                  </tr>
+                  <tr>
+                  <td>Noun</td>
+                  <td>Bare noun (often appears in reduplicative constructions)</td>
+                  </tr>
+                  <tr>
+                  <td>NP</td>
+                  <td>Noun phrase</td>
+                  </tr>
+                  <tr>
+                  <td>NumColl</td>
+                  <td>Collective numeral (e.g. <em>двое, трое</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>NumCrd</td>
+                  <td>Cardinal numeral (e.g. <em>один, два</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>NumOrd</td>
+                  <td>Ordinal numeral (e.g. <em>первый, второй</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>Pfv</td>
+                  <td>Perfective</td>
+                  </tr>
+                  <tr>
+                  <td>Pl</td>
+                  <td>Plural</td>
+                  </tr>
+                  <tr>
+                  <td>PP</td>
+                  <td>Prepositional phrase</td>
+                  </tr>
+                  <tr>
+                  <td>Pred</td>
+                  <td>Predicative</td>
+                  </tr>
+                  <tr>
+                  <td>Prep</td>
+                  <td>Preposition</td>
+                  </tr>
+                  <tr>
+                  <td>PronDem</td>
+                  <td>Demonstrative pronoun (e.g. <em>это, то</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>PronInt</td>
+                  <td>Interrogative / relative pronoun (e.g. <em>кто, что, какой, который, каков, чей, когда, где, куда</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>PronPers</td>
+                  <td>Personal pronoun (e.g. <em>я, мы, ты, вы, он, она, оно, они</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>PronPoss</td>
+                  <td>Possessive pronoun (e.g. <em>мой, твой, наш, его, ее, их</em>)</td>
+                  </tr>
+                  <tr>
+                  <td>Prs</td>
+                  <td>Present</td>
+                  </tr>
+                  <tr>
+                  <td>Pst</td>
+                  <td>Past</td>
+                  </tr>
+                  <tr>
+                  <td>PtcpAct</td>
+                  <td>Active participle</td>
+                  </tr>
+                  <tr>
+                  <td>PtcpPass</td>
+                  <td>Passive participle</td>
+                  </tr>
+                  <tr>
+                  <td>Sbjv</td>
+                  <td>Subjunctive</td>
+                  </tr>
+                  <tr>
+                  <td>Sconj</td>
+                  <td>Subordinating conjunction</td>
+                  </tr>
+                  <tr>
+                  <td>Sg</td>
+                  <td>Singular</td>
+                  </tr>
+                  <tr>
+                  <td>Short</td>
+                  <td>Short form</td>
+                  </tr>
+                  <tr>
+                  <td>Superl</td>
+                  <td>Superlative</td>
+                  </tr>
+                  <tr>
+                  <td>Verb</td>
+                  <td>Bare verb (often in constructions with verbal prefixes)</td>
+                  </tr>
+                  <tr>
+                  <td>Voc</td>
+                  <td>Vocative</td>
+                  </tr>
+                  <tr>
+                  <td>VP</td>
+                  <td>Verb phrase</td>
+                  </tr>
+                  <tr>
+                  <td>XP</td>
+                  <td>Any phrasal unit (a slot that can be NP or VP or AP or PP)</td>
+                  </tr>
+                  </tbody>
+                  </table>
+                  
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_3" aria-expanded="false" aria-controls="eng_3">
+                Explanation of conventions
+              </button>
+            </h2>
+            <div id="eng_3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <p>Each slot and morphological specifications are verified by data from the
+                  Russian National Corpus, and supplemented by internet searches where data is
+                  sparse.</p>
+                  <p>In representing the syntactic structure of constructions, we adopt the
+                  following strategies.</p>
+                  <ol>
+                  <li><p>If a construction contains a noun phrase (NP) that can be used not only in
+                  the predicative function marked with the nominative case but also in other
+                  roles (e.g. object, instrument, etc.) encoded with oblique cases, we do not
+                  specify the case in the construction name: e.g. <strong>NP на нуле</strong> [lit. NP on
+                  zero], as in <em>Иммунитет на нуле</em> ‘Immunity is at the zero level’ vs.
+                  <em>Выписали пациента с иммунитетом на нуле</em> ‘They released a patient with
+                  immunity at the zero level’.</p>
+                  </li>
+                  <li><p>If a construction contains a noun phrase (NP) that is only used in the
+                  predicative function, we indicate its form as the default NP-Nom (= a noun
+                  phrase with the head noun in the Nominative case), as it appears with the
+                  present tense copula: e.g. <strong>NP-Nom Cop NP-Nom VP-Inf</strong>  (as in <em>Он мастер
+                  готовить</em> ‘He is good at cooking [lit. expert cook]’).</p>
+                  </li>
+                  <li><p>We assume that the Instrumental case marking of the predicative NP that may
+                  appear with the past and/or future tense copula is a general rule of
+                  Russian grammar and this is mentioned in the commentary field on each entry
+                  and illustrated in examples: e.g. <em>Он был мастером готовить</em> ‘He was good at
+                  cooking [lit. expert cook]’.</p>
+                  </li>
+                  <li><p>We include the copula in the name of a construction only if the copula verb
+                  can be used in this construction not only in the present tense but also in
+                  other tense(s): e.g. <strong>NP-Nom Cop не очень</strong>, as in <em>Для стоянки место не
+                  очень</em> (Past: <em>было не очень</em>; Future: <em>будет не очень</em>).</p>
+                  </li>
+                  <li><p>Some constructions contain reduplicated nouns rather than NPs, and we
+                  represent this accordingly: e.g. <strong>NP-Nom Cop всем Noun-Dat.Pl ~Noun-Nom</strong>
+                  (as in <em>Всем борщам борщ</em>! ‘The best vegetable soup of all [lit. to all
+                  soups soup]’).</p>
+                  </li>
+                  <li><p>In verb argument constructions that contain a specific verb lexeme (the
+                  anchor verb) and slots for the verb’s arguments, we specify the subject slot
+                  even if it has a default nominative case marking: e.g. <strong>NP-Nom знать толк в
+                  NP-Loc</strong> (as in <em>Он знает толк в настольных играх</em> ‘He is an expert in
+                  board-games [lit. He knows sense in board-games]’). Normally, the anchor
+                  verb is given in the infinitive to represent any inflectional form. For
+                  example, in the construction <strong>NP-Nom знать толк в NP-Loc</strong>, the infinitive
+                  of the anchor verb <em>знать</em> ‘know’ indicates that this verb can be used in
+                  this construction in other forms too.</p>
+                  </li>
+                  <li><p>If the anchor verb can be used in a construction only in a specific
+                  grammatical form, the construction name indicates this specific form (or
+                  forms, if there are very few options): e.g. <strong>с PronPers-Gen хватит/хватило
+                  (NP-Gen)</strong>, as in <em>С меня хватит</em> ‘I’m fed up [lit. from me enough]’.</p>
+                  </li>
+                  <li><p>If the use of the anchor verb in the construction is restricted to a certain
+                  sub-paradigm, this is indicated accordingly. For example, in the
+                  construction <strong>найти-Pst NP-Acc!</strong> (as in <em>Нашли развлечение!</em> ‘What a bad
+                  way to amuse yourself! [lit. found amusement]’), the anchor verb <em>найти</em>
+                  ‘find’ can appear only in the past tense.</p>
+                  </li>
+                  <li><p>For constructions that contain a VP, we do not include the subject slot
+                  NP-Nom in the name of the construction, because the case marking of the
+                  arguments (including the logical subject) depends on specific verb lexemes:
+                  compare <strong>вечно VP</strong> in <em>Вечно мне не везет</em> ‘I am always short on luck
+                  [lit. eternally to me not catch-luck]’ (where the logical subject has an
+                  experiencer role and is marked with the dative case) vs. <em>Вечно Петр
+                  опаздывает</em> ‘Peter is always late [lit. eternally Peter is late]’ (where the
+                  logical subject has the agent role and is encoded with the nominative case).</p>
+                  </li>
+                  <li><p>We do not include morphophonological variants of prepositions (like <em>с</em> and
+                  <em>со</em>) in the name of a construction. Only the default allomorph is
+                  represented: e.g. <strong>VP с NP-Gen</strong>, as in <em>Она с досады топнула ногой</em>.</p>
+                  </li>
+                  </ol>
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  </div>
+
+
+
+
+{% endblock content %}
+
+{% block extrajs %}
+  <script src="{{ config.base_url | safe }}/js/constructicon.js"></script>
+{% endblock extrajs %}
