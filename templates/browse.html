@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div id="app" v-cloak>
+
+    <div v-if="show_data_spinner">
+      <div class="row top-buffer">
+        <div class="col-md-12">
+        <h1>Loading data (can take few seconds) ...</h1>
+          <div class="spinner-border text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="all_data_loaded">
+
+      <div class="row top-buffer">
+        <div class="col-md-6">
+          {% block search %}
+          {% endblock search %}
+        </div>
+
+        <div class="col-md-6">
+          <div v-if="record_numbers_matching_search.length > 0">
+
+            <div class="form-group">
+              <label>Results</label>
+              <select v-model="current_record_number" class="form-control" size="10">
+                <option v-for="record_number in record_numbers_matching_search" :value="record_number">
+                  {[ record_number ]}
+                  -
+                  <b>{[ records[record_number].name ]}</b>
+                  &nbsp;
+                  -
+                  &nbsp;
+                  <i>{[ records[record_number].illustration ]}</i>
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <div>
+
+      <div class="row top-buffer">
+        <div class="col-md-12">
+          <div v-if="current_record_number != null">
+            {[ current_record_number ]}
+            <br>
+
+            <b>NAME</b>
+            <b>{[ records[current_record_number].name ]}</b> - <i>{[ records[current_record_number].illustration ]}</i>
+
+            <div v-for="definition in records[current_record_number].definitions">
+              <br>
+              <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <span v-html="annotate(value(definition))"></span>
+              <br>
+            </div>
+
+            <br>
+            <b>EXAMPLES</b>
+            <ol>
+              <li v-for="example in records[current_record_number].examples"><span v-html="annotate(example)"></span></li>
+            </ol>
+
+            <br>
+            <b>CEFR LEVEL</b> {[ records[current_record_number].cefr_level ]}
+            <br>
+
+            <br>
+            <input type="checkbox" id="checkbox" v-model="show_additional_information">
+            <label for="checkbox">Show additional information</label>
+
+            <div v-if="show_additional_information">
+              <br>
+              <b>COMMON FILLERS</b>
+              <ul>
+                <li v-for="item in records[current_record_number].common_fillers">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>SEMANTIC TYPE</b>
+              <ul>
+                <li v-for="item in records[current_record_number].semantic_types">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>SYNTACTIC TYPE OF CONSTRUCTION</b>
+              <ul>
+                <li v-for="item in records[current_record_number].syntactic_type_of_construction">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>SYNTACTIC FUNCTION OF ANCHOR</b>
+              <ul>
+                <li v-for="item in records[current_record_number].syntactic_function_of_anchor">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>SYNTACTIC STRUCTURE OF ANCHOR</b>
+              <ul>
+                <li v-for="item in records[current_record_number].syntactic_structure_of_anchor">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>PART OF SPEECH OF ANCHOR</b>
+              <ul>
+                <li v-for="item in records[current_record_number].part_of_speech_of_anchor">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>DEPENDENCY STRUCTURE</b>
+              <ol>
+                <li v-for="item in records[current_record_number].dependency_structure">{[ item ]}</li>
+              </ol>
+
+              <br>
+              <b>DEPENDENCY STRUCTURE OF ILLUSTRATION</b>
+              <ol>
+                <li v-for="item in records[current_record_number].dependency_structure_of_illustration">{[ item ]}</li>
+              </ol>
+
+              <br>
+              <b>COMMUNICATIVE TYPE</b>
+              <ul>
+                <li v-for="item in records[current_record_number].intonation">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>USAGE LABEL</b> {[ records[current_record_number].usage_label ]}
+              <br>
+
+              <br>
+              <b>COMMENT</b> {[ records[current_record_number].comment ]}
+              <br>
+
+              <br>
+              <b>REFERENCES</b>
+              <ul>
+                <li v-for="item in records[current_record_number].references">{[ item ]}</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
+
+{% block extrajs %}
+  <script src="{{ config.base_url | safe }}/js/constructicon.js"></script>
+{% endblock extrajs %}
