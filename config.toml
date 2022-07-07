@@ -1,7 +1,7 @@
 # The URL the site will be built for
-base_url = "https://miltend.github.io/hill_mari"
+base_url = "http://127.0.0.1:1111"
 
-title = "Constructicon Hill Mari"
+title = "Constructicon"
 
 description = '''
 Description of the Constructicon.

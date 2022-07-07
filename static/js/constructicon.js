@@ -181,7 +181,6 @@ async function fetch_data(data, url_prefix) {
         records[key] = json_data[key];
         records[key].record = key;
         record_numbers.push(key);
-        levels.add(json_data[key].cefr_level);
     }
 
     data.records = records;
@@ -190,13 +189,11 @@ async function fetch_data(data, url_prefix) {
     data.levels = Array.from(levels);
     data.levels.sort();
 
-    data.semantic_roles_options = collect_options(data.record_numbers, data.records, 'semantic_roles', true);
     data.morphology_options = collect_options(data.record_numbers, data.records, 'morphology', true);
     data.syntactic_type_of_construction_options = collect_options(data.record_numbers, data.records, 'syntactic_type_of_construction', true);
     data.syntactic_function_of_anchor_options = collect_options(data.record_numbers, data.records, 'syntactic_function_of_anchor', true);
     data.syntactic_structure_of_anchor_options = collect_options(data.record_numbers, data.records, 'syntactic_structure_of_anchor', true);
     data.part_of_speech_of_anchor_options = collect_options(data.record_numbers, data.records, 'part_of_speech_of_anchor', true);
-    data.level_options = collect_options(data.record_numbers, data.records, 'cefr_level', false);
 
     data.semantic_types_options = collect_options_tree(data.record_numbers, data.records, 'semantic_types');
 
@@ -207,13 +204,11 @@ async function fetch_data(data, url_prefix) {
     data.search_index = {};
     for (let key of ['name',
             'illustration',
-            'semantic_roles',
             'morphology',
             'syntactic_type_of_construction',
             'syntactic_function_of_anchor',
             'syntactic_structure_of_anchor',
             'part_of_speech_of_anchor',
-            'cefr_level',
             'semantic_types_flat',
         ]) {
         data.search_index[key] = build_search_index(data.record_numbers, data.records, [key]);
@@ -221,21 +216,6 @@ async function fetch_data(data, url_prefix) {
 
     data.all_data_loaded = true;
     data.show_data_spinner = false;
-}
-
-
-// based on https://stackoverflow.com/a/19270021 (CC-BY-SA 3.0)
-function random_selection(arr, n_max) {
-    let len = arr.length;
-    let n = Math.min(n_max, len);
-    let result = new Array(n);
-    let taken = new Array(len);
-    while (n--) {
-        let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
 }
 
 
@@ -254,11 +234,8 @@ var app = new Vue({
         record_numbers: [],
         record_numbers_matching_search: [],
         records: {},
-        daily_dose_level: 'A1',
         search_string: '',
         levels: [],
-        semantic_roles_options: [],
-        semantic_roles_selected: null,
         morphology_options: [],
         morphology_selected: null,
         syntactic_type_of_construction_options: [],
@@ -269,14 +246,13 @@ var app = new Vue({
         syntactic_structure_of_anchor_selected: null,
         part_of_speech_of_anchor_options: [],
         part_of_speech_of_anchor_selected: null,
-        level_options: [],
-        level_selected: null,
         semantic_types_options: [],
         semantic_types_selected: null,
     },
     created: function() {
         this.show_data_spinner = true;
-        fetch_data(this, 'https://raw.githubusercontent.com/zojabutenko/hill_mari-data/generated/');
+        fetch_data(this, 'https://raw.githubusercontent.com/constructicon/hill_mari-data/generated/');
+
 
         // https://lodash.com/docs#debounce
         this.search_debounced = _.debounce(this.search, 500);
@@ -289,9 +265,6 @@ var app = new Vue({
         },
         search_string: function(new_, old_) {
             this.search_debounced();
-        },
-        semantic_roles_selected: function(new_, old_) {
-            this.advanced_search_debounced();
         },
         morphology_selected: function(new_, old_) {
             this.advanced_search_debounced();
@@ -306,9 +279,6 @@ var app = new Vue({
             this.advanced_search_debounced();
         },
         part_of_speech_of_anchor_selected: function(new_, old_) {
-            this.advanced_search_debounced();
-        },
-        level_selected: function(new_, old_) {
             this.advanced_search_debounced();
         },
         semantic_types_selected: function(new_, old_) {
@@ -345,23 +315,19 @@ var app = new Vue({
             let record_numbers_matching_search = [];
 
             let selected_options = {};
-            selected_options['semantic_roles'] = this.semantic_roles_selected;
             selected_options['morphology'] = this.morphology_selected;
             selected_options['syntactic_type_of_construction'] = this.syntactic_type_of_construction_selected;
             selected_options['syntactic_function_of_anchor'] = this.syntactic_function_of_anchor_selected;
             selected_options['syntactic_structure_of_anchor'] = this.syntactic_structure_of_anchor_selected;
             selected_options['part_of_speech_of_anchor'] = this.part_of_speech_of_anchor_selected;
-            selected_options['cefr_level'] = this.level_selected;
             selected_options['semantic_types_flat'] = this.semantic_types_selected;
 
             for (let key of [
-                    'semantic_roles',
                     'morphology',
                     'syntactic_type_of_construction',
                     'syntactic_function_of_anchor',
                     'syntactic_structure_of_anchor',
                     'part_of_speech_of_anchor',
-                    'cefr_level',
                     'semantic_types_flat',
                 ]) {
                 if (selected_options[key] != null) {
@@ -376,24 +342,5 @@ var app = new Vue({
             record_numbers_matching_search.sort((a, b) => a - b);
             this.record_numbers_matching_search = record_numbers_matching_search;
         },
-        annotate: function(text) {
-            // renders words that come right after [...] as subscript with color
-            let matches = text.match(/(?<=\])[A-Za-z]+/g);
-            for (let substring of matches) {
-                text = text.replace(substring, '<sub><span style="color: #db2f6d">' + substring + '</span></sub>');
-            }
-            return text;
-        },
-        get_random_selection: function() {
-            let records_with_this_level = [];
-            for (let record_number of this.record_numbers) {
-                if (this.records[record_number].cefr_level == this.daily_dose_level) {
-                    records_with_this_level.push(record_number);
-                }
-            }
-            let selected = random_selection(records_with_this_level, 5);
-            selected.sort((a, b) => a - b);
-            this.record_numbers_matching_search = selected;
-        }
     }
 })

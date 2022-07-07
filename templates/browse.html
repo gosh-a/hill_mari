@@ -54,19 +54,20 @@
 
             <div v-for="definition in records[current_record_number].definitions">
               <br>
-              <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <span v-html="annotate(value(definition))"></span>
+<!--              <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <span v-html="annotate(value(definition))"></span>-->
+                <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b>
+
               <br>
             </div>
 
             <br>
             <b>EXAMPLES</b>
             <ol>
-              <li v-for="example in records[current_record_number].examples"><span v-html="annotate(example)"></span></li>
+<!--              <li v-for="example in records[current_record_number].examples"><span v-html="annotate(example)"></span></li>-->
+              <li v-for="example in records[current_record_number].examples"></li>
+
             </ol>
 
-            <br>
-            <b>CEFR LEVEL</b> {[ records[current_record_number].cefr_level ]}
-            <br>
 
             <br>
             <input type="checkbox" id="checkbox" v-model="show_additional_information">
@@ -74,10 +75,10 @@
 
             <div v-if="show_additional_information">
               <br>
-              <b>COMMON FILLERS</b>
-              <ul>
-                <li v-for="item in records[current_record_number].common_fillers">{[ item ]}</li>
-              </ul>
+<!--              <b>COMMON FILLERS</b>-->
+<!--              <ul>-->
+<!--                <li v-for="item in records[current_record_number].common_fillers">{[ item ]}</li>-->
+<!--              </ul>-->
 
               <br>
               <b>SEMANTIC TYPE</b>
@@ -109,27 +110,27 @@
                 <li v-for="item in records[current_record_number].part_of_speech_of_anchor">{[ item ]}</li>
               </ul>
 
-              <br>
-              <b>DEPENDENCY STRUCTURE</b>
-              <ol>
-                <li v-for="item in records[current_record_number].dependency_structure">{[ item ]}</li>
-              </ol>
+<!--              <br>-->
+<!--              <b>DEPENDENCY STRUCTURE</b>-->
+<!--              <ol>-->
+<!--                <li v-for="item in records[current_record_number].dependency_structure">{[ item ]}</li>-->
+<!--              </ol>-->
 
-              <br>
-              <b>DEPENDENCY STRUCTURE OF ILLUSTRATION</b>
-              <ol>
-                <li v-for="item in records[current_record_number].dependency_structure_of_illustration">{[ item ]}</li>
-              </ol>
+<!--              <br>-->
+<!--              <b>DEPENDENCY STRUCTURE OF ILLUSTRATION</b>-->
+<!--              <ol>-->
+<!--                <li v-for="item in records[current_record_number].dependency_structure_of_illustration">{[ item ]}</li>-->
+<!--              </ol>-->
 
-              <br>
-              <b>COMMUNICATIVE TYPE</b>
-              <ul>
-                <li v-for="item in records[current_record_number].intonation">{[ item ]}</li>
-              </ul>
+<!--              <br>-->
+<!--              <b>COMMUNICATIVE TYPE</b>-->
+<!--              <ul>-->
+<!--                <li v-for="item in records[current_record_number].intonation">{[ item ]}</li>-->
+<!--              </ul>-->
 
-              <br>
-              <b>USAGE LABEL</b> {[ records[current_record_number].usage_label ]}
-              <br>
+<!--              <br>-->
+<!--              <b>USAGE LABEL</b> {[ records[current_record_number].usage_label ]}-->
+<!--              <br>-->
 
               <br>
               <b>COMMENT</b> {[ records[current_record_number].comment ]}
