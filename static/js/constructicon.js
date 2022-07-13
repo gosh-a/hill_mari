@@ -137,6 +137,40 @@ function collect_options_tree(record_numbers, records, key) {
 }
 
 
+// function arrange_glosses(illustration, gloss) {
+//     const words = illustration.split(" ");
+//     const glosses = gloss.split(" ");
+//     const tbl = document.createElement('table');
+//     // tbl.style.width = '100px';
+//     // tbl.style.border = '1px solid white';
+//
+//     var tbdy = document.createElement('tbody');
+//     for (var i = 0; i < 2; i++) {
+//         var tr = document.createElement('tr');
+//         if (i == 0) {
+//             for (var j = 0; j < words.length; j++) {
+//                 var td = document.createElement('td');
+//                 td.appendChild(document.createTextNode(words[j]))
+//                 tr.appendChild((td))
+//             }
+//
+//         } else {
+//             for (var j = 0; j < words.length; j++) {
+//                 var td = document.createElement('td');
+//                 td.appendChild(document.createTextNode(glosses[j]))
+//                 tr.appendChild((td))
+//             }
+//         }
+//         tbdy.appendChild(tr);
+//     }
+//     tbl.appendChild(tbdy);
+//     console.log(tbl);
+//     // var tg = document.getElementById('table_glosses')
+//     return tbl
+//
+// }
+
+
 function flatten_semantic_types(record_numbers, records) {
     let key = "semantic_types";
 
@@ -342,5 +376,30 @@ var app = new Vue({
             record_numbers_matching_search.sort((a, b) => a - b);
             this.record_numbers_matching_search = record_numbers_matching_search;
         },
+        arrange_glosses: function(illustration, gloss) {
+            let new_ill = "";
+            let new_gloss = "";
+            const il_words = illustration.split(" ");
+            const gl_words = gloss.split(" ");
+            for (let i = 0; i < il_words.length; i++) {
+                new_ill += il_words[i];
+                new_ill += " ";
+                new_gloss += gl_words[i];
+                new_gloss += " ";
+                if (il_words[i].length < gl_words[i].length) {
+                    let difference = gl_words[i].length - il_words[i].length;
+                    for (let j = 0; j < difference; j++) {
+                        new_ill += " "
+                    }
+
+                } else if (il_words[i].length > gl_words[i].length) {
+                    let difference = il_words[i].length - gl_words[i].length;
+                    for (let j = 0; j < difference; j++) {
+                        new_gloss += " "
+                    }
+                }
+            }
+            return [new_ill, new_gloss]
+        }
     }
 })
