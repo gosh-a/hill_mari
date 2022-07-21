@@ -4,7 +4,7 @@
   <form>
     <div class="form-group">
       <label>Search in names and illustrations</label>
-      <input v-model="search_string" class="form-control">
+      <input v-model="search_string" class="form-control" onkeydown="if(event.keyCode==13){return false;}" >
     </div>
   </form>
 {% endblock search %}
