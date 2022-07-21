@@ -377,29 +377,79 @@ var app = new Vue({
             this.record_numbers_matching_search = record_numbers_matching_search;
         },
         arrange_glosses: function(illustration, gloss) {
+            const diacritics = "¨ ̑".split(" ")
+            console.log(diacritics)
+            //¨ ̑
             let new_ill = "";
             let new_gloss = "";
+            // const re = [a-zäöüə̈ə̑čšž];
             const il_words = illustration.split(" ");
             const gl_words = gloss.split(" ");
+            if (il_words.length > gl_words.length) {
+                let diff = il_words.length - gl_words.length
+                for (let d = 0; d < diff; d++) {
+                    gl_words.push(' ')
+                }
+            } else if (gl_words.length > il_words.length) {
+                let diff = gl_words.length - il_words.length
+                for (let d = 0; d < diff; d++) {
+                    il_words.push(' ')
+                }
+            }
+            // console.log(il_words, gl_words)
             for (let i = 0; i < il_words.length; i++) {
-                new_ill += il_words[i];
-                new_ill += " ";
-                new_gloss += gl_words[i];
-                new_gloss += " ";
-                if (il_words[i].length < gl_words[i].length) {
-                    let difference = gl_words[i].length - il_words[i].length;
-                    for (let j = 0; j < difference; j++) {
-                        new_ill += " "
-                    }
+                if (il_words[i] == '-') {
+                    gl_words.splice(i, 0, " ");
+                    new_ill += il_words[i]
+                    new_ill += " "
+                    new_gloss += " "
+                } else {
+                    new_ill += il_words[i];
+                    new_ill += " ";
+                    new_gloss += gl_words[i];
+                    new_gloss += " ";
+                    if (il_words[i].length < gl_words[i].length) {
+                        let difference = gl_words[i].length - il_words[i].length;
+                        for (let di = 0; di < diacritics.length; di++) {
+                            if (il_words.indexOf(diacritics[di]) > -1)
+                            {
+                                difference -= 1;
+                                console.log('di!')
 
-                } else if (il_words[i].length > gl_words[i].length) {
-                    let difference = il_words[i].length - gl_words[i].length;
-                    for (let j = 0; j < difference; j++) {
-                        new_gloss += " "
+                            }
+                        }
+                        // console.log(difference, gl_words[i], il_words[i])
+
+                        for (let j = 0; j < difference; j++) {
+                            new_ill += " "
+                        }
+
+                    } else if (il_words[i].length > gl_words[i].length) {
+                        let difference = il_words[i].length - gl_words[i].length;
+                        for (let di = 0; di < diacritics.length; di++) {
+                            if (il_words.indexOf(diacritics[di]) > -1)
+                            {
+                                difference += 1;
+                                console.log('di!')
+
+                            }
+                        }
+                        // console.log(difference, gl_words[i], il_words[i])
+
+                        for (let j = 0; j < difference; j++) {
+                            new_gloss += " "
+                        }
                     }
                 }
             }
+
+            // console.log(new_ill)
+            // console.log(new_gloss)
+
             return [new_ill, new_gloss]
+        },
+        split_gloss: function (gloss) {
+            return gloss.split(" ")
         }
     }
 })
