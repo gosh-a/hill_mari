@@ -137,6 +137,40 @@ function collect_options_tree(record_numbers, records, key) {
 }
 
 
+// function arrange_glosses(illustration, gloss) {
+//     const words = illustration.split(" ");
+//     const glosses = gloss.split(" ");
+//     const tbl = document.createElement('table');
+//     // tbl.style.width = '100px';
+//     // tbl.style.border = '1px solid white';
+//
+//     var tbdy = document.createElement('tbody');
+//     for (var i = 0; i < 2; i++) {
+//         var tr = document.createElement('tr');
+//         if (i == 0) {
+//             for (var j = 0; j < words.length; j++) {
+//                 var td = document.createElement('td');
+//                 td.appendChild(document.createTextNode(words[j]))
+//                 tr.appendChild((td))
+//             }
+//
+//         } else {
+//             for (var j = 0; j < words.length; j++) {
+//                 var td = document.createElement('td');
+//                 td.appendChild(document.createTextNode(glosses[j]))
+//                 tr.appendChild((td))
+//             }
+//         }
+//         tbdy.appendChild(tr);
+//     }
+//     tbl.appendChild(tbdy);
+//     console.log(tbl);
+//     // var tg = document.getElementById('table_glosses')
+//     return tbl
+//
+// }
+
+
 function flatten_semantic_types(record_numbers, records) {
     let key = "semantic_types";
 
@@ -181,7 +215,6 @@ async function fetch_data(data, url_prefix) {
         records[key] = json_data[key];
         records[key].record = key;
         record_numbers.push(key);
-        levels.add(json_data[key].cefr_level);
     }
 
     data.records = records;
@@ -190,13 +223,11 @@ async function fetch_data(data, url_prefix) {
     data.levels = Array.from(levels);
     data.levels.sort();
 
-    data.semantic_roles_options = collect_options(data.record_numbers, data.records, 'semantic_roles', true);
     data.morphology_options = collect_options(data.record_numbers, data.records, 'morphology', true);
     data.syntactic_type_of_construction_options = collect_options(data.record_numbers, data.records, 'syntactic_type_of_construction', true);
     data.syntactic_function_of_anchor_options = collect_options(data.record_numbers, data.records, 'syntactic_function_of_anchor', true);
     data.syntactic_structure_of_anchor_options = collect_options(data.record_numbers, data.records, 'syntactic_structure_of_anchor', true);
     data.part_of_speech_of_anchor_options = collect_options(data.record_numbers, data.records, 'part_of_speech_of_anchor', true);
-    data.level_options = collect_options(data.record_numbers, data.records, 'cefr_level', false);
 
     data.semantic_types_options = collect_options_tree(data.record_numbers, data.records, 'semantic_types');
 
@@ -207,13 +238,11 @@ async function fetch_data(data, url_prefix) {
     data.search_index = {};
     for (let key of ['name',
             'illustration',
-            'semantic_roles',
             'morphology',
             'syntactic_type_of_construction',
             'syntactic_function_of_anchor',
             'syntactic_structure_of_anchor',
             'part_of_speech_of_anchor',
-            'cefr_level',
             'semantic_types_flat',
         ]) {
         data.search_index[key] = build_search_index(data.record_numbers, data.records, [key]);
@@ -221,21 +250,6 @@ async function fetch_data(data, url_prefix) {
 
     data.all_data_loaded = true;
     data.show_data_spinner = false;
-}
-
-
-// based on https://stackoverflow.com/a/19270021 (CC-BY-SA 3.0)
-function random_selection(arr, n_max) {
-    let len = arr.length;
-    let n = Math.min(n_max, len);
-    let result = new Array(n);
-    let taken = new Array(len);
-    while (n--) {
-        let x = Math.floor(Math.random() * len);
-        result[n] = arr[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
 }
 
 
@@ -254,11 +268,8 @@ var app = new Vue({
         record_numbers: [],
         record_numbers_matching_search: [],
         records: {},
-        daily_dose_level: 'A1',
         search_string: '',
         levels: [],
-        semantic_roles_options: [],
-        semantic_roles_selected: null,
         morphology_options: [],
         morphology_selected: null,
         syntactic_type_of_construction_options: [],
@@ -269,8 +280,6 @@ var app = new Vue({
         syntactic_structure_of_anchor_selected: null,
         part_of_speech_of_anchor_options: [],
         part_of_speech_of_anchor_selected: null,
-        level_options: [],
-        level_selected: null,
         semantic_types_options: [],
         semantic_types_selected: null,
     },
@@ -290,9 +299,6 @@ var app = new Vue({
         search_string: function(new_, old_) {
             this.search_debounced();
         },
-        semantic_roles_selected: function(new_, old_) {
-            this.advanced_search_debounced();
-        },
         morphology_selected: function(new_, old_) {
             this.advanced_search_debounced();
         },
@@ -306,9 +312,6 @@ var app = new Vue({
             this.advanced_search_debounced();
         },
         part_of_speech_of_anchor_selected: function(new_, old_) {
-            this.advanced_search_debounced();
-        },
-        level_selected: function(new_, old_) {
             this.advanced_search_debounced();
         },
         semantic_types_selected: function(new_, old_) {
@@ -345,23 +348,19 @@ var app = new Vue({
             let record_numbers_matching_search = [];
 
             let selected_options = {};
-            selected_options['semantic_roles'] = this.semantic_roles_selected;
             selected_options['morphology'] = this.morphology_selected;
             selected_options['syntactic_type_of_construction'] = this.syntactic_type_of_construction_selected;
             selected_options['syntactic_function_of_anchor'] = this.syntactic_function_of_anchor_selected;
             selected_options['syntactic_structure_of_anchor'] = this.syntactic_structure_of_anchor_selected;
             selected_options['part_of_speech_of_anchor'] = this.part_of_speech_of_anchor_selected;
-            selected_options['cefr_level'] = this.level_selected;
             selected_options['semantic_types_flat'] = this.semantic_types_selected;
 
             for (let key of [
-                    'semantic_roles',
                     'morphology',
                     'syntactic_type_of_construction',
                     'syntactic_function_of_anchor',
                     'syntactic_structure_of_anchor',
                     'part_of_speech_of_anchor',
-                    'cefr_level',
                     'semantic_types_flat',
                 ]) {
                 if (selected_options[key] != null) {
@@ -376,24 +375,80 @@ var app = new Vue({
             record_numbers_matching_search.sort((a, b) => a - b);
             this.record_numbers_matching_search = record_numbers_matching_search;
         },
-        annotate: function(text) {
-            // renders words that come right after [...] as subscript with color
-            let matches = text.match(/(?<=\])[A-Za-z]+/g);
-            for (let substring of matches) {
-                text = text.replace(substring, '<sub><span style="color: #db2f6d">' + substring + '</span></sub>');
-            }
-            return text;
-        },
-        get_random_selection: function() {
-            let records_with_this_level = [];
-            for (let record_number of this.record_numbers) {
-                if (this.records[record_number].cefr_level == this.daily_dose_level) {
-                    records_with_this_level.push(record_number);
+        arrange_glosses: function(illustration, gloss) {
+            const diacritics = "¨ ̑".split(" ")
+            console.log(diacritics)
+            //¨ ̑
+            let new_ill = "";
+            let new_gloss = "";
+            // const re = [a-zäöüə̈ə̑čšž];
+            const il_words = illustration.split(" ");
+            const gl_words = gloss.split(" ");
+            if (il_words.length > gl_words.length) {
+                let diff = il_words.length - gl_words.length
+                for (let d = 0; d < diff; d++) {
+                    gl_words.push(' ')
+                }
+            } else if (gl_words.length > il_words.length) {
+                let diff = gl_words.length - il_words.length
+                for (let d = 0; d < diff; d++) {
+                    il_words.push(' ')
                 }
             }
-            let selected = random_selection(records_with_this_level, 5);
-            selected.sort((a, b) => a - b);
-            this.record_numbers_matching_search = selected;
+            // console.log(il_words, gl_words)
+            for (let i = 0; i < il_words.length; i++) {
+                if (il_words[i] == '-') {
+                    gl_words.splice(i, 0, " ");
+                    new_ill += il_words[i]
+                    new_ill += " "
+                    new_gloss += " "
+                } else {
+                    new_ill += il_words[i];
+                    new_ill += " ";
+                    new_gloss += gl_words[i];
+                    new_gloss += " ";
+                    if (il_words[i].length < gl_words[i].length) {
+                        let difference = gl_words[i].length - il_words[i].length;
+                        for (let di = 0; di < diacritics.length; di++) {
+                            if (il_words.indexOf(diacritics[di]) > -1)
+                            {
+                                difference -= 1;
+                                console.log('di!')
+
+                            }
+                        }
+                        // console.log(difference, gl_words[i], il_words[i])
+
+                        for (let j = 0; j < difference; j++) {
+                            new_ill += " "
+                        }
+
+                    } else if (il_words[i].length > gl_words[i].length) {
+                        let difference = il_words[i].length - gl_words[i].length;
+                        for (let di = 0; di < diacritics.length; di++) {
+                            if (il_words.indexOf(diacritics[di]) > -1)
+                            {
+                                difference += 1;
+                                console.log('di!')
+
+                            }
+                        }
+                        // console.log(difference, gl_words[i], il_words[i])
+
+                        for (let j = 0; j < difference; j++) {
+                            new_gloss += " "
+                        }
+                    }
+                }
+            }
+
+            // console.log(new_ill)
+            // console.log(new_gloss)
+
+            return [new_ill, new_gloss]
+        },
+        split_gloss: function (gloss) {
+            return gloss.split(" ")
         }
     }
 })
