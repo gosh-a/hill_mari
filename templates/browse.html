@@ -60,7 +60,7 @@
             <br>
             <table>
               <tr>
-                <td v-for="ill in split_gloss(records[current_record_number].illustration)"><i>{[ ill ]}&nbsp;</i></td>
+                <td v-for="ill in split_gloss(records[current_record_number].illustration)">{[ ill ]}&nbsp;</td>
               </tr>
               <tr>
                 <td v-for="gl in split_gloss(records[current_record_number].illustration_gloss_russian)">{[ gl ]}&nbsp;</td>
@@ -101,7 +101,13 @@
               <br>
               <b>SEMANTIC TYPE</b>
               <ul>
-                <li v-for="item in records[current_record_number].semantic_types">{[ item ]}</li>
+                <li v-for="item in records[current_record_number].semantic_types">
+                  {[ item['type'] ]}
+                  <ul>
+                    <li v-for="it in item['subtypes']">{[ it['type'] ]}</li>
+                  </ul>
+                </li>
+
               </ul>
 
               <br>
