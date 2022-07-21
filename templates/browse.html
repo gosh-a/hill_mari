@@ -42,7 +42,7 @@
 <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[0] ]}</pre>-->
 <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[1] ]}</pre>-->
 <!--                  <i>{[ records[record_number].illustration_translation_russian ]}</i>-->
-                </option>
+                </option>>
               </select>
             </div>
           </div>
@@ -122,7 +122,7 @@
 
               <br>
               <b>REFERENCES</b>
-              <ul>
+              <ul v-if="records[current_record_number].references[0] != ''" >
                 <li v-for="item in records[current_record_number].references">{[ item ]}</li>
               </ul>
             </div>
