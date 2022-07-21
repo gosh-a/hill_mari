@@ -1,7 +1,6 @@
 +++
 +++
 
-{{ youtube(id="hEbVtimsoJQ", class="youtube") }}
 
 # Инструкции
 
