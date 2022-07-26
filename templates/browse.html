@@ -59,7 +59,7 @@
     <div v-if="all_data_loaded">
 
       <div class="row top-buffer">
-        <div class="col-md-6">
+        <div class="col-md-12">
           {% block search %}
           {% endblock search %}
         </div>
@@ -84,7 +84,7 @@
 <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[0] ]}</pre>-->
 <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[1] ]}</pre>-->
 <!--                  <i>{[ records[record_number].illustration_translation_russian ]}</i>-->
-                </option>
+                </option>>
               </select>
             </div>
           </div>
@@ -102,79 +102,75 @@
                 <br>
     
                 <b>NAME: </b>
-                <b>{[ records[current_record_number].name ]}</b>
+            <b>{[ records[current_record_number].name ]}</b>
+            <br>
+            <table>
+              <tr>
+                <td v-for="ill in split_gloss(records[current_record_number].illustration)">{[ ill ]}&nbsp;</td>
+              </tr>
+              <tr>
+                <td v-for="gl in split_gloss(records[current_record_number].illustration_gloss_russian)">{[ gl ]}&nbsp;</td>
+              </tr>
+            </table>
+            <div>{[ records[current_record_number].illustration_translation_russian ]}</div>
+            <div v-for="definition in records[current_record_number].definitions">
+              <br>
+                <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <br> <span v-html="value(definition)"></span>
+
+              <br>
+            </div>
+
+            <br>
+            <b>EXAMPLES</b>
+            <ol>
+              <li v-for="(example, index) in records[current_record_number].examples">
                 <br>
                 <table>
-                  <tr>
-                    <td v-for="ill in split_gloss(records[current_record_number].illustration)"><i>{[ ill ]}&nbsp;</i></td>
-                  </tr>
-                  <tr>
-                    <td v-for="gl in split_gloss(records[current_record_number].illustration_gloss_russian)">{[ gl ]}&nbsp;</td>
-                  </tr>
-                </table>
-                <div>{[ records[current_record_number].illustration_translation_russian ]}</div>
-                <!-- <div v-for="definition in records[current_record_number].definitions">
-                  <br>
-                    <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <br> <span v-html="value(definition)"></span>
-                  <br>
-                </div> -->
-    
-                <div class="russian">
-                  <br>
-                    <b>DEFINITION (Russian)</b> <br> <span>{[ records[current_record_number].definitions[0]["russian"] ]}</span>
-                  <br>
-                </div>
-                <!-- <div class="english">
-                  <br>
-                    <b>DEFINITION (English)</b> <br> <span>{[ records[current_record_number].definitions[1]["english"] ]}</span>
-                  <br>
-                </div> -->
-    
-                <br>
-                <b>EXAMPLES</b>
-                <ol>
-                  <li v-for="(example, index) in records[current_record_number].examples">
-                    <br>
-                    <table>
-                        <tr>
-                          <td v-for="word in split_gloss(example)"><i>{[ word ]}&nbsp; </i></td>
-                        </tr>
-                        <tr>
-                          <td v-for="gloss in split_gloss(records[current_record_number].examples_glosses_russian[index])">{[ gloss ]} &nbsp;</td>
-                        </tr>
-                      </table>
-                      <div>{[ records[current_record_number].examples_translation_russian[index] ]}</div>
-                  </li>
-                </ol>
-    
-                <br>
-                <input type="checkbox" id="checkbox" v-model="show_additional_information">
-                <label for="checkbox">Show additional information</label>
-    
-                <div v-if="show_additional_information">
-                  <br>
-    
-                  <br>
-                  <b>SEMANTIC TYPE</b>
+                    <tr>
+                      <td v-for="word in split_gloss(example)"><i>{[ word ]}&nbsp; </i></td>
+                    </tr>
+                    <tr>
+                      <td v-for="gloss in split_gloss(records[current_record_number].examples_glosses_russian[index])">{[ gloss ]} &nbsp;</td>
+                    </tr>
+                  </table>
+                  <div>{[ records[current_record_number].examples_translation_russian[index] ]}</div>
+              </li>
+            </ol>
+
+            <br>
+            <input type="checkbox" id="checkbox" v-model="show_additional_information">
+            <label for="checkbox">Show additional information</label>
+
+            <div v-if="show_additional_information">
+              <br>
+
+              <br>
+              <b>SEMANTIC TYPE</b>
+              <ul>
+                <li v-for="item in records[current_record_number].semantic_types">
+                  {[ item['type'] ]}
                   <ul>
-                    <li v-for="item in records[current_record_number].semantic_types">{[ item ]}</li>
+                    <li v-for="it in item['subtypes']">{[ it['type'] ]}</li>
                   </ul>
-    
-                  <br>
-                  <b>SYNTACTIC TYPE OF CONSTRUCTION</b>
-                  <ul>
-                    <li v-for="item in records[current_record_number].syntactic_type_of_construction">{[ item ]}</li>
-                  </ul>
-    
-                  <br>
-                  <b>COMMENT</b> {[ records[current_record_number].comment ]}
-                  <br>
-    
-                  <br>
-                  <b>REFERENCES</b>
-                  <ul>
-                    <li v-for="item in records[current_record_number].references">{[ item ]}</li>
-                  </ul>
+                </li>
+
+              </ul>
+
+              <br>
+              <b>SYNTACTIC TYPE OF CONSTRUCTION</b>
+              <ul>
+                <li v-for="item in records[current_record_number].syntactic_type_of_construction">{[ item ]}</li>
+              </ul>
+
+              <br>
+              <b>COMMENT</b> {[ records[current_record_number].comment ]}
+              <br>
+
+              <br>
+              <b>REFERENCES</b>
+              <ul v-if="records[current_record_number].references[0] != ''" >
+                <li v-for="item in records[current_record_number].references">{[ item ]}</li>
+              </ul>
                 </div>
     
               </div>
