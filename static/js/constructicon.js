@@ -170,6 +170,51 @@ function collect_options_tree(record_numbers, records, key) {
 //
 // }
 
+// const tree = document.createDocumentFragment();
+
+// var form_level = document.createElement("div")
+// form_level.innerHTML = "Choose level:"
+
+// var select_level = document.createElement("select")
+// select_level.setAttribute("name", "level")
+// select_level.setAttribute("id", "level")
+
+// var array_levels = ["rus", "eng"]
+
+// for (const ind in array_levels) {
+//     let option = document.createElement("input")
+//     option.setAttribute("type", "radio")
+//     option.setAttribute("value", array_levels[ind])
+//     // option.innerHTML = array_levels[ind]
+//     let text = document.createElement("label")
+//     text.setAttribute("for", array_levels[ind])
+
+//     select_level.appendChild(option)
+//     select_level.appendChild(text)
+// }
+
+
+// // var levels = document.getElementById("level")
+// let level_button = document.createElement("input")
+// level_button.setAttribute("type", "button")
+// // choose_button.setAttribute("onclick", "choose_level()")
+// level_button.setAttribute("value", "Choose")
+
+// level_button.onclick = function() {
+//     choose_level();
+// };
+
+// form_level.appendChild(select_level)
+// form_level.appendChild(level_button)
+
+
+// tree.append(form_level)
+// document.getElementById("choose_lang").appendChild(tree)
+
+
+
+
+
 
 function flatten_semantic_types(record_numbers, records) {
     let key = "semantic_types";
