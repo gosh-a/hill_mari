@@ -113,10 +113,9 @@
               </tr>
             </table>
             <div>{[ records[current_record_number].illustration_translation_russian ]}</div>
-            <div v-for="definition in records[current_record_number].definitions">
+            <div class="russian">
               <br>
-                <b>DEFINITION ({[ to_title_case(key(definition)) ]})</b> <br> <span v-html="value(definition)"></span>
-
+                <b>DEFINITION</b> <br> <span>{[ records[current_record_number].definitions[0]["russian"] ]}</span>
               <br>
             </div>
 
@@ -202,7 +201,7 @@
     
                 <div class="english" v-if="records[current_record_number].definitions[1] != null">
                   <br>
-                    <b>DEFINITION (English)</b> <br> <span>{[ records[current_record_number].definitions[1]["english"] ]}</span>
+                    <b>DEFINITION</b> <br> <span>{[ records[current_record_number].definitions[1]["english"] ]}</span>
                   <br>
                 </div>
     
