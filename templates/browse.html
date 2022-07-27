@@ -70,22 +70,27 @@
 
             <div class="form-group">
               <label>Results</label>
+<!--              <select v-model="current_record_number" class="form-control" size="10">-->
               <select v-model="current_record_number" class="form-control" size="10">
+<!--                <option v-for="record_number in record_numbers_matching_search" :value="record_number">-->
                 <option v-for="record_number in record_numbers_matching_search" :value="record_number">
+
                   {[ record_number ]}
-                  -
+                  <br>
+                  &ensp;
                   <b>{[ records[record_number].name ]}</b>
                   &nbsp;
-                  -
+                  —
                   &nbsp;
                   <i>{[ records[record_number].illustration ]}</i>
 
-<!--                  <br>-->
-<!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[0] ]}</pre>-->
-<!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[1] ]}</pre>-->
-<!--                  <i>{[ records[record_number].illustration_translation_russian ]}</i>-->
+
                 </option>>
               </select>
+              <!--                  <br>-->
+              <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[0] ]}</pre>-->
+              <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[1] ]}</pre>-->
+              <!--                  <i>{[ records[record_number].illustration_translation_russian ]}</i>-->
             </div>
           </div>
         </div>
@@ -123,8 +128,9 @@
             <b>EXAMPLES</b>
             <ol>
               <li v-for="(example, index) in records[current_record_number].examples">
-                <br>
-                <table>
+<!--                <br>-->
+                <div class="col-md p-3 bg-light bg-opacity-50 text-opacity-100 m-3">
+                  <table>
                     <tr>
                       <td v-for="word in split_gloss(example)"><i>{[ word ]}&nbsp; </i></td>
                     </tr>
@@ -133,6 +139,7 @@
                     </tr>
                   </table>
                   <div>{[ records[current_record_number].examples_translation_russian[index] ]}</div>
+                </div>
               </li>
             </ol>
 
