@@ -70,27 +70,17 @@
 
             <div class="form-group">
               <label>Results</label>
-<!--              <select v-model="current_record_number" class="form-control" size="10">-->
               <select v-model="current_record_number" class="form-control" size="10">
 <!--                <option v-for="record_number in record_numbers_matching_search" :value="record_number">-->
-                <option v-for="record_number in record_numbers_matching_search" :value="record_number">
 
-                  {[ record_number ]}
-                  <br>
-                  &ensp;
-                  <b>{[ records[record_number].name ]}</b>
-                  &nbsp;
-                  —
-                  &nbsp;
-                  <i>{[ records[record_number].illustration ]}</i>
-
-
-                </option>>
+<!--                <div v-for="record_number in record_numbers_matching_search" :value="record_number">-->
+                  <option :value="record_number">{[ record_number ]}&ensp;{[ records[record_number].name ]}&nbsp;—&nbsp;{[ records[record_number].illustration ]}</option>
+                  <option disabled> {[ records[record_number].illustration_gloss_russian ]} </option>
+                  <option disabled> {[ records[record_number].illustration_translation_russian ]} </option>
+<!--                </div>-->
+<!--                </option>-->
               </select>
-              <!--                  <br>-->
-              <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[0] ]}</pre>-->
-              <!--                  <pre>{[ arrange_glosses(records[record_number].illustration, records[record_number].illustration_gloss_russian)[1] ]}</pre>-->
-              <!--                  <i>{[ records[record_number].illustration_translation_russian ]}</i>-->
+
             </div>
           </div>
         </div>
