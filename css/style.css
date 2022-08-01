@@ -1,0 +1,58 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+h3, h4, h5, h6 {
+  font-size: 16px;
+}
+
+.top-buffer { margin-top: 25px; }
+
+.more-buffer { margin-top: 150px; }
+
+.bottom-buffer { margin-bottom: 25px; }
+
+.highlight { background-color: #8fe6fe; }
+
+[v-cloak] {
+  display: none;
+}
+
+table {
+  white-space: nowrap;
+}
+
+.selectST {
+  margin-left: 31.5%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.bblock {
+	display: table-cell;
+    font-size: 15px;
+  	width: 200px;
+    height: 200px;
+    vertical-align: middle;
+}
+
+.wrap {
+  margin-left: 26%;
+  display: table;
+  border-spacing: 20px 20px;
+}

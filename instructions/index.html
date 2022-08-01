@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="http://127.0.0.1:1111/img/favicon.ico">
+
+    <title>Constructicon</title>
+
+    
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content="https://raw.githubusercontent.com/constructicon/russian/main/content/logo/constructicon-round.png" />
+    
+
+    
+      <meta name="description" content="Description of the Constructicon.
+" />
+      <meta name="twitter:description" content="Description of the Constructicon.
+" />
+    
+
+    
+      <meta name="twitter:title" content="Constructicon" />
+    
+
+    <link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.min.js"
+            integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68="
+            crossorigin="anonymous"></script>
+
+    <!-- https://vue-treeselect.js.org/ -->
+    <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@^0.4.0/dist/vue-treeselect.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@3.14.0/dist/js-yaml.min.js"
+            integrity="sha256-8mtDTinb8+d2bC/9KhCJoCRBEylWUIV/3YEt5cSUvRk="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.19.2/dist/axios.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.19/lodash.min.js"
+            integrity="sha256-Jvh9+A4HNbbWsWl1Dw7kAzNsU3y8elGIjLnUSUNMtLg="
+            crossorigin="anonymous"></script>
+
+    <!-- https://github.com/bvaughn/js-search -->
+    <script src="https://cdn.jsdelivr.net/npm/js-search@2.0.0/dist/umd/js-search.min.js"
+            integrity="sha256-LD9UsSATk+xTzAbk8nD2gA2bjHKvetXtCMDAFkM2K5Q="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.0.0-rc.1/chartjs-plugin-datalabels.min.js" integrity="sha512-+UYTD5L/bU1sgAfWA0ELK5RlQ811q8wZIocqI7+K0Lhh8yVdIoAMEs96wJAIbgFvzynPm36ZCXtkydxu1cs27w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <link href="http://127.0.0.1:1111/css/style.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- navigation -->
+      <div class="row top-buffer">
+        <div class="col-md-3">
+          <figure class="figure">
+            
+            <img src="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;processed_images&#x2F;66ea0c2bc689ec2a00.png"
+                 class="figure-img img-fluid rounded" alt="Constructicon logo">
+          </figure>
+        </div>
+        <div class="col-md-9">
+          <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #d9f2ff;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/">Browse</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/daily/">Daily dose</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/advanced-search/">Advanced search</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/instructions-english/">Instructions (English)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/instructions-russian/">Instructions (Russian)</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/statistics/">Statistics</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="http://127.0.0.1:1111/about/">About</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <!-- end navigation -->
+
+      <div class="top-buffer">
+        
+  
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="rus-tab" data-bs-toggle="tab" data-bs-target="#rus" type="button" role="tab" aria-controls="english" aria-selected="true"><img src="../content/logo/ru.svg" alt="rus" width="25"></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="eng-tab" data-bs-toggle="tab" data-bs-target="#eng" type="button" role="tab" aria-controls="russian" aria-selected="false"><img src="../content/logo/us.svg" alt="eng" width="25"></button>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+
+  <div class="tab-pane fade show active" id="eng" role="tabpanel" aria-labelledby="eng-tab">
+      <div class="accordion lang_tab">
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_1" aria-expanded="true" aria-controls="eng_1">
+                Объяснение страниц сайта
+              </button>
+            </h2>
+            <div id="eng_1" class="accordion-collapse collapse">
+
+              <div class="accordion-body">
+                  
+                <h2>Стандартный поиск (Basic search)</h2>
+
+                Эта страница является обзорной и позволяет ознакомиться со списком из более чем 40 конструкций, включенных в Модальный конструктикон горномарийского языка. Запись каждой конструкции в списке представлена тремя строками: на первой строке помещается номер, имя (обобщенная формула) и иллюстрация конструкции, а на второй и третьей строках даются ее поморфемная аннотация (в соответствии с Лейпцигскими правилами глоссирования) и перевод на русский язык.
+
+                Нажатие на конструкцию в списке открывает ее полное описание. Под описанием конструкции расположена кнопка “Show additional information”, которая открывает дополнительную информацию о конструкции.
+                На этой же странице предусмотрен стандартный поиск: пользователь может искать конструкции, вводя любую последовательность символов в поисковую строку над списком конструкций. Здесь можно задавать точный поиск по элементам, входящим в состав конструкции (словам, аффиксам или глоссам). Например, если вы хотите получить выдачу всех конструкций, содержащих показатель императива, достаточно ввести в строку поиска глоссу Imp. Результаты поиска появятся в окне снизу, где прежде помещался весь список конструкций.
+                Кроме того, в строку поиска можно вводить слова на русском и английском языке, чтобы находить горномарийские конструкции, служащие их “эквивалентами”. Например, при поиске способов выражения возможности достаточно ввести в строку поиска формы “мочь” или “уметь” (“can” или “able”).
+
+
+                <h2>Продвинутый поиск (Advanced search)</h2>
+
+                На этой странице пользователь может задать поиск конструкций по различным параметрам, которые можно комбинировать. Описание категорий, доступных для поиска, находится в разделах “Морфологические пометы”, “Синтаксический тип конструкции” и “Семантический тип конструкции”.
+
+
+                <h2>Инструкции (Instructions)</h2>
+
+                Эта страница содержит инструкции для пользователей на русском и английском языках.
+
+
+                <h2>О проекте (About)</h2>
+
+                Эта страница содержит информацию о ресурсе и его разработчиках.
+
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_2" aria-expanded="false" aria-controls="eng_2">
+                Объяснение терминов
+              </button>
+            </h2>
+            <div id="eng_2" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <h2>Морфологические пометы</h2>
+                <p>В этом разделе приводятся расшифровки для сокращений, используемых в формуле или глоссе конструкции. По этим сокращениям можно задавать поиск по характеристике “Morphology” на вкладке продвинутого поиска.</p>
+                  <table>
+                  <tbody>
+                  <tr>
+                  <td>Aor</td>
+                  <td>аорист</td>
+                  </tr>
+                  <tr>
+                  <td>Cl</td>
+                  <td>клауза</td>
+                  </tr>
+                  <tr>
+                  <td>Cop</td>
+                  <td>копула</td>
+                  </tr>
+                  <tr>
+                  <td>Cvb</td>
+                  <td>конверб</td>
+                  </tr>
+                  <tr>
+                  <td>Dat</td>
+                  <td>датив</td>
+                  </tr>
+                  <tr>
+                  <td>Gen</td>
+                  <td>генитив</td>
+                  </tr>
+                  <tr>
+                  <td>Inf</td>
+                  <td>инфинитив</td>
+                  </tr>
+                  <tr>
+                  <td>Imp</td>
+                  <td>императив</td>
+                  </tr>
+                  <tr>
+                  <td>Nom</td>
+                  <td>номинатив</td>
+                  </tr>
+                  <tr>
+                  <td>NP</td>
+                  <td>именная группа</td>
+                  </tr>
+                  <tr>
+                  <td>Npst</td>
+                  <td>непрошедшее время</td>
+                  </tr>
+                  <tr>
+                  <td>Poss</td>
+                  <td>посессивность</td>
+                  </tr>
+                  <tr>
+                  <td>Pret</td>
+                  <td>претерит</td>
+                  </tr>
+                  <tr>
+                  <td>V</td>
+                  <td>глагол</td>
+                  </tr>
+                  <tr>
+                  <td>VP</td>
+                  <td>глагольная группа</td>
+                  </tr>
+                  
+                  </tbody>
+                  </table>
+                  <h2>Синтаксический тип конструкции</h2>
+                  <ul>
+                    <li><b>Biclausal construction</b> (Биклаузальная конструкция) – Конструкция включает две клаузы.</li>
+                    <li><b>Clause</b> (Клауза) – Конструкция представляет собой отдельную независимую клаузу.</li>
+                    <li><b>Copula construction</b> (Конструкция со связочным глаголом) – Конструкция содержит слот глагола-связки.</li>
+                    <li><b>Matrix and Complement Construction</b> (Конструкция с матричным предикатом и сентенциальным дополнениeм) – Конструкция содержит матричный предикат, который имеет валентность на сентенциальный актант.</li>
+                    <li><b>Morphological construction</b> (Словообразовательная конструкция) – В состав конструкции входит словообразовательный формант, как правило, суффикс.</li>
+                  </ul>
+                  <h2>Семантический тип конструкции</h2>
+                  <ul>
+                    <li><b>Actuality</b> (Реализованная возможность) – Указание на успешную реализацию действия (ср. англ. глагол manage (см. Plungian & van der Auwera 1998: 104), на "реализованную способность" (Aijmer 2004: 62). Эта категория находится на пересечении аспектуальности и модальности (см. Мордашова В работе): NP-Dat удалось VP-Inf – <i>Мише удалось покурить.</i> Без подтипов.</li>
+                    <li><b>Apprehension</b> (Опасение) – Выражение опасения или предостережения относительно некоторой нежелательной ситуации, которую говорящий считает возможной и хочет избежать (Baydina 2016). Говорящий опасается, что эта ситуация может произойти (подтип Аппрехенсив) и призывает собеседника совершить действие, которое бы помогло избежать этой ситуации (подтип Превентив) (cf. Добрушина 2006).
+                    <ul>
+                      <li>Apprehensive (Аппрехенсив) – Конструкция выражает опасение говорящего относительно того, что может произойти некоторая нежелательная ситуация: ((Я) боюсь,) как бы не VP-Pfv.Pst – <i>Как бы Миша не опоздал!</i></li>
+                      <li>Preventive (Превентив) – Конструкция выражает предостережение и является попыткой говорящего предотвратить нежела­тельное действие или событие: смотреть-Imp, (не) VP-Imp – <i>Смотрите, не опоздайте!</i></li>
+                    </ul></li>
+                    <li><b>Attitude</b> (Отношение) – Конструкции этого типа выражают отношение, которое понимается как эмоционально-оценочный взгляд говорящего на ситуацию или ее участников. Выражается, что говорящий чувствует по отношению к ситуации, какую внутреннюю позицию он занимает, какой точки зрения он придерживается относительно ситуации или темы (Endresen and Janda 2020).
+                    <ul>
+                      <li>Emotional Attitude (Эмоциональное отношение) – Указание на эмоциональное отношение говорящего к ситуации. Могут обозначаться конкретные эмоции и чувства, неконтролируемость эмоций или глубина чувств: NP-Dat Noun-Nom Cop не (в) ~Noun (без NP-Gen) – <i>Девочкам радость не в радость.</i></li>
+                    </ul></li>
+                    <li><b>Causation</b> (Побуждение к действию) – Мы используем тег Побуждение к действию в наиболее широком смысле, который не обязательно подразумевает появление нового участника в исходной диатезе (как ожидалось бы от каузативной актантной деривации).
+                    <ul>
+                      <li>Direct (Прямое) – Конструкция содержит прямо и ясно выраженное побуждение к действию (прежде всего императивные формы): давай(те) VP-Fut.1.Pl! – <i>Давайте пойдем в кино!</i></li>
+                      <li>Indirect (Непрямое) – Конструкция содержит имплицитное или несколько завуалированное побуждение к действию (например, в виде вопроса): как насчёт XP? – <i>Как насчёт выпить?</i></li>
+                    </ul></li>
+                    <li><b>Concession</b> (Уступка) – Конструкции этого типа противопоставляют две ситуации, которые исключают друг друга. Конструкции обозначают, что одна из этих ситуаций имеет место или возможна даже несмотря на враждебные ей условия, создаваемые другой ситуацией. При выделении подтипов уступки мы опираемся на классификацию уступительных конструкций в Апресян 1999.
+                    <ul>
+                      <li>Failed expectation (Обманутое ожидание) – Указание на то, что некоторая ситуация происходит несмотря на препятствующие ей обстоятельства другой ситуации: Несмотря/Невзирая на NP-Acc, Cl – <i>Несмотря на отзывы туристов, он всё равно поехал в Грузию.</i></li>
+                    </ul></li>
+                    <li><b>Degree of intensity</b> (Степень интенсивности) – Конструкции, выражающие степень интенсивности, соотносят проявление некоторого признака или ситуации со шкалой интенсивности и определяют место на этой шкале относительно полярных значений минимума и максимума. Каждая такая конструкция содержит указание на то, насколько сильно выражается или проявляется какой-либо признак. Группа конструкций степени интенсивности включает конструкции как высокой, так и низкой интенсивности. Теги-подтипы взяты из академической грамматики английского языка, которая содержит классификацию интенсификаторов в английском языке (Quirk et al. 1985). См. применение этой классификации к русским конструкциям в Zhukova 2020.
+                    <ul>
+                      <li>Booster (Высокая степень) – Указание на высокую степень проявления признака, который может (теоретически) неограниченно возрастать, т.е. не имеет внутреннего предела: VP не в пример Adj-Cmp/Adv-Cmp – <i>Он выглядел не в пример приятнее.</i></li>
+                      <li>Diminisher (Небольшая степень) – Указание на небольшую степень проявления признака или на небольшое отклонение от нормы. Степень интенсивности больше, чем у конструкций подтипа Minimizer. Как правило используется с прилагательными и наречиями: не такой уж и Adj – <i>Не такой уж и страшный.</i></li>
+                    </ul></li>
+                    <li><b>Discourse structure</b> (Структура дискурса) – Конструкции этого типа организуют текст, его внутреннюю структуру, например, оформляют перечисление, введение новой информации, подытоживание, переход к новой теме, приведение примера или пояснение понятия.
+                    <ul>
+                      <li>Emphasis (Эмфаза) – Логическое выделение какого-либо элемента высказывания: (и) без того XP – <i>Капитан и без того знал, что нужно делать.</i></li>
+                    </ul></li>
+                    <li><b>Epistemic modality</b> (Эпистемическая модальность) – Эпистемическая модальность подразумевает оценку вероятности некоторого положения дел (см. Nuyts 2016: 38) и указывает на степень уверенности (как правило, говорящего) в сообщаемой информации (см. Boye 2016: 117).
+                    <ul>
+                      <li>High degree of certainty (Уверенность) – Указание на высокую степень уверенности в сообщаемом: ситуация оценивается как вероятная или очень вероятная: зуб даю, что Cl – <i>Зуб даю, что никто в комнату не заходил.</i></li>
+                      <li>Low degree of certainty (Неуверенность) – Указание на низкую степень уверенности в сообщаемом: ситуация оценивается как маловероятная: вроде (как) XP/Cl – <i>Он вроде как идёт.</i></li>
+                    </ul></li>
+                    <li><b>Mirative</b> (Миративность) – Выражение удивления говорящего неожиданно установленным фактом (DeLancey 1997; Aikhenvald 2012): NP-Nom возьми и VP-Imp – <i>А он возьми и купи новую машину!</i> Без подтипов.</li>
+                    <li><b>Prohibition</b> (Запрет) – Конструкции этого типа содержат различные способы выражения запрета, в частности, стандартный (Прохибитив) и смягченный (Аттенуативный прохибитив). Вслед за (Рахилина 2013), в этот класс мы также включаем континуативные прохибитивы.
+                    <ul>
+                      <li>Attenuated prohibitive (Аттенуативный прохибитив) – Конструкция выражает запрет на совершение действия в будущем, но имеет более смягченную форму и произносится менее категоричным тоном, чем прототипический прохибитив: (NP-Dat) не стоит VP-Ipfv.Inf – <i>Не стоит разговаривать с ним.</i></li>
+                      <li>Continuative prohibitive (Континуативный прохибитив) – Конструкция выражает побуждение прервать некоторое действие: хорош VP-Ipfv.Inf! – <i>Эй, наверху! Хорош прыгать!</i></li>
+                      <li>Prohibitive (Прохибитив) – Конструкция выражает строгий категоричный запрет на совершение действия в будущем: ни слова NP-Dat о NP-Loc! – <i>Ни слова маме о нашей поездке!</i></li>
+                    </ul></li>
+                    <li><b>Request</b> (Просьба) – Конструкция выражает просьбу говорящего совершить действие: нельзя ли Cop VP-Inf? – <i>Нельзя ли сделать музыку потише?</i> Без подтипов.</li>
+                    <li><b>Root modality</b> (Исходная ("корневая") модальность) – Мы следуем традиционному подходу, в соответствии с которым модальность понимается узко, т. е. как категория, включающая только значения необходимости и возможности (см. van der Auwera & Plungian 1998; Nuyts 2016). Для деонтической внешней возможности вводится отдельный тег Разрешение.
+                    <ul>
+                      <li>Necessity: Internal (Необходимость: Внутренняя) – Указание на необходимость, обусловленную потребностями и свойствами (напр. чертами характера) участника: (NP-Dat) Cop нужный-Short/необходимый-Short NP-Nom – <i>Мне нужна ваша поддержка.</i></li>
+                      <li>Necessity: External (Необходимость: Внешняя) – Указание на необходимость, обусловленную внешними обстоятельствами, навязывающими участнику определенное поведение: (NP-Dat) пришлось/придётся VP-Inf – <i>Пришлось выпить лекарство.</i></li>
+                      <li>Possibility (Возможность) – Указание на динамическую возможность, под которой понимается как внутренняя возможность (способность), обусловленная свойствами самого участника (его физическими качествами, умениями), так и внешняя возможность, обусловленная отсутствием препятствий для осуществления ситуации: (NP-Dat) Cop можно VP-Inf – <i>До Москвы из Лондона можно долететь за четыре часа.</i></li>
+                      <li>Permission (Разрешение) – Указание на деонтическую внешнюю возможность, т. е. разрешение на осуществление ситуации или запрос на таковое со стороны говорящего: не страшно/ничего, если Cl? – <i>Не страшно, если я закурю?</i></li>
+                    </ul></li>
+                    <li><b>Routine</b> (Формулы речи) – Устойчивые фразы для этикетного общения. Используются в типичных коммуникативных ситуациях (приветствие, прощание, благодарность, извинение и т.д.).
+                    <ul>
+                      <li>Kind wishes (Формулы пожеланий) – Выражение пожеланий (в том числе соболезнований) и поздравлений: (NP-Nom поздравлять) c NP-Ins (NP-Acc) – <i>С Новым годом!</i></li>
+                      <li>Politeness marker (Маркеры вежливости) – Выражение вежливости говорящего: Уж простить-Imp/извинить-Imp, но Cl – <i>Уж простите, но всё будет по договору.</i></li>
+                    </ul></li>
+                    <li><b>Source of opinion</b> (Источник мнения) – Указание на автора высказанного мнения.
+                    <ul>
+                      <li>Asking for opinion (Вопрос о мнении) – Конструкция формулирует вопрос к участнику относительно его мнения по некоторой теме: PronPers-Nom не находить, что Cl? – <i>Вы не находите, что это немного странно?</i></li>
+                    </ul></li>
+                    <li><b>Timeline</b> (Временная референция) – Локализация ситуации на оси времени (в терминах прошлое – настоящее – будущее).
+                    <ul>
+                      <li>Past (Прошлое) – Соотнесение ситуации с прошлым безотносительно его близости или отдаленности от момента речи: как-то раз VP – <i>Я как-то раз видела её на концерте.</i></li>
+                      <li>Future (Будущее) – Соотнесение ситуации с будущим, безотносительно его близости или отдаленности от момента речи: со временем Cl – <i>Со временем она обязательно научится готовить.</i></li>
+                    </ul></li>
+                    <li><b>Volition</b> (Волитивность) – Указание на желание или пожелание. Mы включаем сюда и обозначение желания говорящего (оптатив), и обозначение желания любого участника ситуации (дезидератив): вот бы (NP-Dat) (никогда не/всегда) VP-Inf! – <i>Вот бы никогда не работать!</i> Без подтипов.</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item paragraph">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eng_3" aria-expanded="false" aria-controls="eng_3">
+                Используемые сокращения
+              </button>
+            </h2>
+            <div id="eng_3" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                
+
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      
+              
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+      </div>
+
+      <div class="more-buffer">
+		
+          <hr>
+
+          <a href="https://diku.no/" target="_blank">
+            <figure class="figure">
+              
+              <img src="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;processed_images&#x2F;5a56b1753b10711c00.jpg"
+                   class="figure-img img-fluid rounded" alt="Diku logo">
+            </figure>
+          </a>
+
+          <span style="display:inline-block; width: 25px;"></span>
+
+          <a href="https://uit.no/" target="_blank">
+            <figure class="figure">
+              
+              <img src="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;processed_images&#x2F;7a9d3808320cf7f600.png"
+                   class="figure-img img-fluid rounded" alt="UiT logo">
+            </figure>
+          </a>
+
+          <a href="https://www.hse.ru/en/" target="_blank">
+            <figure class="figure">
+              
+              <img src="http:&#x2F;&#x2F;127.0.0.1:1111&#x2F;processed_images&#x2F;ba4794503f453bf200.jpg"
+                   class="figure-img img-fluid rounded" alt="HSE logo">
+            </figure>
+          </a>
+        
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+
+    
+  <script src="http://127.0.0.1:1111/js/constructicon.js"></script>
+
+
+  </body>
+</html>
